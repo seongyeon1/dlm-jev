@@ -1,0 +1,38 @@
+[project]
+name = "jevlike"
+version = "0.1.0"
+description = "Jev-style typed decision engine on a diffusion LM"
+readme = "README.md"
+authors = [
+    { name = "seongyeon", email = "ksy974498@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=5.0.1",
+    "fastapi>=0.141.1",
+    "mlx-vlm>=0.7.4",
+    "numpy>=2.5.3",
+    "uvicorn>=0.54.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.5,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
+    "ruff>=0.16.9",
+]
+
+[project.scripts]
+jevlike-serve = "jevlike.server:main"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["UP006", "UP007", "UP035", "UP045"]
