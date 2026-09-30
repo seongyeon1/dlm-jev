@@ -230,7 +230,7 @@ class DiffusionReader:
         answers: Dict[str, Answer] = {}
         for sr in result.slots:
             question = request.questions[sr.question_id]
-            t = self.calibrator.temperature(question.type) if request.calibrated else 1.0
+            t = self.calibrator.temperature(question.type, sr.question_id) if request.calibrated else 1.0
             answers[sr.question_id] = to_answer(question, softmax(sr.logits, t))
         return DecideResponse(
             model=self.model_path,

@@ -9,12 +9,14 @@ import json
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Sequence
+from typing import Dict, List, Optional, Sequence
 
 import numpy as np
 from numpy.typing import ArrayLike
 
-_LOG_T_MIN, _LOG_T_MAX = math.log(0.05), math.log(20.0)
+# T < 0.5 would sharpen the model beyond what a small fit set can justify: on perfectly
+# separable fit data NLL keeps falling as T -> 0 and the fit degenerates to 0/1 outputs.
+_LOG_T_MIN, _LOG_T_MAX = math.log(0.5), math.log(20.0)
 
 
 def softmax(logits: Sequence[float], temperature: float = 1.0) -> np.ndarray:
@@ -102,8 +104,10 @@ class Calibrator:
     temperatures: Dict[str, float] = field(default_factory=dict)
     name: str = "uncalibrated"
 
-    def temperature(self, question_type: str) -> float:
-        """Temperature for a question type."""
+    def temperature(self, question_type: str, question_id: Optional[str] = None) -> float:
+        """Temperature for a question: a per-id fit (``q:<id>``) wins over the per-type one."""
+        if question_id is not None and f"q:{question_id}" in self.temperatures:
+            return self.temperatures[f"q:{question_id}"]
         return self.temperatures.get(question_type, 1.0)
 
     def save(self, path: Path) -> None:
