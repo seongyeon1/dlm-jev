@@ -15,7 +15,7 @@ from mlx.utils import tree_flatten
 from mlx_vlm.models.diffusion_gemma.language import Router
 from mlx_vlm.trainer.lora_layers import LoRALinear
 
-from jevlike.canvas import Canvas
+from dlm_jev.canvas import Canvas
 
 TARGETS = ("q_proj", "v_proj")
 

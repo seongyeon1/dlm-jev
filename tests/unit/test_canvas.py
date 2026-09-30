@@ -2,7 +2,7 @@
 
 import pytest
 
-from jevlike.canvas import (
+from dlm_jev.canvas import (
     CHOICE_LABELS,
     MIN_CANVAS_LENGTH,
     NOUL_LABELS,
@@ -10,7 +10,7 @@ from jevlike.canvas import (
     render_user_message,
     render_user_parts,
 )
-from jevlike.schema import ChoiceQuestion, NoulQuestion, ScoreQuestion
+from dlm_jev.schema import ChoiceQuestion, NoulQuestion, ScoreQuestion
 
 
 def test_slots_sit_after_prefix_and_read_label_tokens(tokenizer) -> None:

@@ -14,8 +14,8 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from benchmark import RUNS, tasks  # noqa: E402
 
-from jevlike.calibration import evaluate  # noqa: E402
-from jevlike.engine import DiffusionReader  # noqa: E402
+from dlm_jev.calibration import evaluate  # noqa: E402
+from dlm_jev.engine import DiffusionReader  # noqa: E402
 
 
 def main() -> None:

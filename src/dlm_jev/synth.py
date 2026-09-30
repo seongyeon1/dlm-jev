@@ -11,7 +11,7 @@ import random
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
-from jevlike.schema import ChoiceQuestion, DecideRequest, NoulQuestion, Question, ScoreQuestion
+from dlm_jev.schema import ChoiceQuestion, DecideRequest, NoulQuestion, Question, ScoreQuestion
 
 CATEGORIES = ["결제·청구", "버그", "계정 접근", "기능 요청", "사용 방법", "서비스 장애"]
 URGENCY = ["낮음", "보통", "높음", "긴급"]

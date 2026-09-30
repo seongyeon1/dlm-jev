@@ -1,4 +1,4 @@
-# jevlike — DiffusionGemma 기반 Jev 스타일 결정 모델
+# dlm-jev — DiffusionGemma 기반 Jev 스타일 결정 모델
 
 ## 1. 목표
 
@@ -56,7 +56,7 @@ decoder 경로에만 loss를 건다. MoE router의 top-k 인덱스는 이산값�
 ## 4. 컴포넌트
 
 ```
-src/jevlike/
+src/dlm_jev/
   schema.py       요청/응답 타입 (Pydantic v2)
   canvas.py       프롬프트·canvas 조립, slot 위치 계산 (토크나이저만 필요, 모델 불필요)
   engine.py       MLX DiffusionGemma 로드, 질문 prefix cache → state prefill → slot read (batched)
@@ -94,7 +94,7 @@ compare variants with the paired analysis below, not with this table.
 
 | Change | Evidence | Decision |
 |---|---|---|
-| Re-reads (4-read average) | AG News: 0/100 answers changed; Yelp: 4/100, raw NLL 2.75→2.60. Same-process A/B: decode 544→170ms without them | **off by default** (`extra_reads=0`, `JEVLIKE_EXTRA_READS`) |
+| Re-reads (4-read average) | AG News: 0/100 answers changed; Yelp: 4/100, raw NLL 2.75→2.60. Same-process A/B: decode 544→170ms without them | **off by default** (`extra_reads=0`, `DLM_JEV_EXTRA_READS`) |
 | Batched reads + vocab projection only at slots | Same noise: max prob diff vs full-logits path 0.004 (bf16) | kept |
 | Question-first prompt + prefix cache | Hit vs full prefill: identical to a no-clone split prefill (0.0); split-prefill numerics shift uncertain slots by ≤0.03. 3-question A/B: 777→505ms, 1-question 409→362ms | kept |
 | Label reminder after state (v4 vs v3) | v3 lost AG News accuracy (0.815→0.790, raw NLL +0.23, CI excludes 0); v4 restores 0.815 (NLL +0.19, CI touches 0). Yelp gain kept in both (NLL −0.35, CI excludes 0) | kept (v4) |
@@ -123,7 +123,7 @@ significant (McNemar p ≥ 0.18), but distributions move: flips concentrate on i
 
 ## 6b. Domain: support-ticket triage (synthetic, Korean)
 
-`jevlike.synth` samples ticket attributes first and derives the labels from them (`labels()`), then renders Korean
+`dlm_jev.synth` samples ticket attributes first and derives the labels from them (`labels()`), then renders Korean
 text from phrase banks, including hard cases: "취소" in a non-churn sense, billing words in non-billing tickets,
 angry tone on low-impact tickets. Four questions per request: category (6), urgency (4), churn, engineering.
 `scripts/domain_eval.py`: 600 tickets, per-question T fit on the first 300, test on the last 300.
@@ -185,7 +185,7 @@ overconfident (NLL 2–4.6 on most rows). One AR model and one prompt family; no
 1. **Real tickets.** Everything in §6b is synthetic. A few hundred labelled real tickets would show whether the
    LoRA policy gain (urgency, engineering) survives real writing, and give the calibration set that matters.
 2. **Guard against forgetting.** Mix a small share of public/general items into LoRA training, or keep one adapter
-   per domain and load it per request (`JEVLIKE_ADAPTER`); AG News and Yelp dropped 4–5pt after the domain LoRA.
+   per domain and load it per request (`DLM_JEV_ADAPTER`); AG News and Yelp dropped 4–5pt after the domain LoRA.
 3. **Calibrate after LoRA.** T was fitted on the base model's reads; refit per question on the adapter's reads.
 4. **Throughput.** MLX serves one request at a time. For concurrency, move to the vLLM path (OpenJev) and keep this
    repo's canvas/calibration/LoRA logic.

@@ -16,7 +16,7 @@ import string
 from dataclasses import dataclass
 from typing import Dict, List, Protocol, Sequence, Tuple, Union
 
-from jevlike.schema import ChoiceQuestion, NoulQuestion, Question, ScoreQuestion
+from dlm_jev.schema import ChoiceQuestion, NoulQuestion, Question, ScoreQuestion
 
 # Single source for labels: the prompt text and the slot read both use these.
 NOUL_LABELS: Tuple[str, str] = ("yes", "no")

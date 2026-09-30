@@ -20,9 +20,9 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from benchmark import RUNS, tasks  # noqa: E402
 
-from jevlike.calibration import evaluate  # noqa: E402
-from jevlike.engine import DiffusionReader  # noqa: E402
-from jevlike.schema import DecideRequest, NoulQuestion, ScoreQuestion  # noqa: E402
+from dlm_jev.calibration import evaluate  # noqa: E402
+from dlm_jev.engine import DiffusionReader  # noqa: E402
+from dlm_jev.schema import DecideRequest, NoulQuestion, ScoreQuestion  # noqa: E402
 
 # Unrelated to every task's label, answerable from any text.
 DISTRACTORS = {

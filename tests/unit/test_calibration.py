@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from jevlike.calibration import Calibrator, evaluate, fit_temperature, normalized_confidence, softmax
+from dlm_jev.calibration import Calibrator, evaluate, fit_temperature, normalized_confidence, softmax
 
 
 def test_confidence_bounds() -> None:

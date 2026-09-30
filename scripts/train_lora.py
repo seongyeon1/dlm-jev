@@ -23,10 +23,10 @@ from mlx import nn
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from benchmark import RUNS, tasks  # noqa: E402
 
-from jevlike.calibration import Metrics, evaluate  # noqa: E402
-from jevlike.engine import DiffusionReader  # noqa: E402
-from jevlike.lora import apply_lora, save_adapter, slot_loss  # noqa: E402
-from jevlike.synth import QUESTIONS, make_dataset  # noqa: E402
+from dlm_jev.calibration import Metrics, evaluate  # noqa: E402
+from dlm_jev.engine import DiffusionReader  # noqa: E402
+from dlm_jev.lora import apply_lora, save_adapter, slot_loss  # noqa: E402
+from dlm_jev.synth import QUESTIONS, make_dataset  # noqa: E402
 
 
 def train(reader: DiffusionReader, n_train: int, seed: int, lr: float, rank: int, scale: float) -> Path:

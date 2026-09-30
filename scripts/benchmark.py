@@ -18,8 +18,8 @@ from typing import Dict, Iterator, List, Tuple
 
 from datasets import load_dataset
 
-from jevlike.calibration import Calibrator, Metrics, evaluate
-from jevlike.schema import ChoiceQuestion, DecideRequest, NoulQuestion, ScoreQuestion
+from dlm_jev.calibration import Calibrator, Metrics, evaluate
+from dlm_jev.schema import ChoiceQuestion, DecideRequest, NoulQuestion, ScoreQuestion
 
 RUNS = Path(__file__).resolve().parent.parent / "runs"
 AG_TOPICS = ["World", "Sports", "Business", "Science/Technology"]
@@ -49,7 +49,7 @@ def tasks(per_task: int, seed: int) -> Iterator[Tuple[str, str, DecideRequest, i
 
 def collect(per_task: int, seed: int, out: Path) -> None:
     """Run the reader over all tasks, appending to ``out`` (resumable by uid)."""
-    from jevlike.engine import DiffusionReader
+    from dlm_jev.engine import DiffusionReader
 
     done = {json.loads(line)["uid"] for line in out.read_text().splitlines()} if out.exists() else set()
     reader = DiffusionReader()

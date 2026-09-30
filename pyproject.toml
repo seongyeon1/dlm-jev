@@ -1,7 +1,10 @@
 [project]
-name = "jevlike"
+name = "dlm-jev"
 version = "0.1.0"
-description = "Jev-style typed decision engine on a diffusion LM"
+description = "Jev-style typed decision engine on a diffusion language model (DiffusionGemma, MLX)"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = ["dlm", "diffusion-language-model", "jev", "typed-decisions", "calibration", "mlx", "diffusiongemma"]
 readme = "README.md"
 authors = [
     { name = "seongyeon", email = "ksy974498@gmail.com" }
@@ -29,7 +32,7 @@ dev = [
 ]
 
 [project.scripts]
-jevlike-serve = "jevlike.server:main"
+dlm-jev-serve = "dlm_jev.server:main"
 
 [tool.ruff]
 line-length = 120

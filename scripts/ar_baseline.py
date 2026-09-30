@@ -25,11 +25,11 @@ from mlx_lm.models.cache import make_prompt_cache
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from benchmark import RUNS, tasks  # noqa: E402
 
-from jevlike.calibration import Metrics, evaluate  # noqa: E402
-from jevlike.canvas import SYSTEM_PROMPT, _slot_tokens, labels_for, render_state, render_user_parts  # noqa: E402
-from jevlike.engine import DiffusionReader  # noqa: E402
-from jevlike.schema import DecideRequest  # noqa: E402
-from jevlike.synth import QUESTIONS, make_dataset  # noqa: E402
+from dlm_jev.calibration import Metrics, evaluate  # noqa: E402
+from dlm_jev.canvas import SYSTEM_PROMPT, _slot_tokens, labels_for, render_state, render_user_parts  # noqa: E402
+from dlm_jev.engine import DiffusionReader  # noqa: E402
+from dlm_jev.schema import DecideRequest  # noqa: E402
+from dlm_jev.synth import QUESTIONS, make_dataset  # noqa: E402
 
 
 def render_state_first(request: DecideRequest) -> str:

@@ -5,9 +5,9 @@ from typing import Any
 import pytest
 from fastapi.testclient import TestClient
 
-from jevlike import server
-from jevlike.engine import to_answer
-from jevlike.schema import DecideRequest, DecideResponse, Usage
+from dlm_jev import server
+from dlm_jev.engine import to_answer
+from dlm_jev.schema import DecideRequest, DecideResponse, Usage
 
 
 class StubReader:

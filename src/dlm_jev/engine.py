@@ -13,9 +13,9 @@ import numpy as np
 from mlx_vlm.models.diffusion_gemma.language import _cache_state
 from numpy.typing import ArrayLike
 
-from jevlike.calibration import Calibrator, normalized_confidence, softmax
-from jevlike.canvas import SYSTEM_PROMPT, Canvas, build_canvas, render_user_parts
-from jevlike.schema import (
+from dlm_jev.calibration import Calibrator, normalized_confidence, softmax
+from dlm_jev.canvas import SYSTEM_PROMPT, Canvas, build_canvas, render_user_parts
+from dlm_jev.schema import (
     Answer,
     ChoiceAnswer,
     ChoiceQuestion,
@@ -91,7 +91,7 @@ class DiffusionReader:
         self.model_path = model_path
         self.model, self.processor = load(model_path)
         if adapter_path:
-            from jevlike.lora import load_adapter
+            from dlm_jev.lora import load_adapter
 
             load_adapter(self.model, Path(adapter_path))
             self.model_path = f"{model_path}+{Path(adapter_path).stem}"

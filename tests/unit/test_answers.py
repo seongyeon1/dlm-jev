@@ -3,8 +3,8 @@
 import pytest
 from pydantic import ValidationError
 
-from jevlike.engine import to_answer
-from jevlike.schema import ChoiceQuestion, DecideRequest, NoulQuestion, ScoreQuestion
+from dlm_jev.engine import to_answer
+from dlm_jev.schema import ChoiceQuestion, DecideRequest, NoulQuestion, ScoreQuestion
 
 
 def test_noul_is_probability_of_yes() -> None:

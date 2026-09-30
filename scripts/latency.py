@@ -10,8 +10,8 @@ from typing import Dict, List
 
 from smoke import REQUEST
 
-from jevlike.engine import DiffusionReader
-from jevlike.schema import DecideRequest
+from dlm_jev.engine import DiffusionReader
+from dlm_jev.schema import DecideRequest
 
 SINGLE = {
     "state": "The pasta was cold and the waiter ignored us for twenty minutes.",

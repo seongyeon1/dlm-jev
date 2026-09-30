@@ -2,7 +2,7 @@
 
 import random
 
-from jevlike.synth import CATEGORIES, QUESTIONS, Ticket, labels, make_dataset, render
+from dlm_jev.synth import CATEGORIES, QUESTIONS, Ticket, labels, make_dataset, render
 
 
 def _t(cat: str, **kw: object) -> Ticket:
@@ -45,7 +45,7 @@ def test_dataset_is_deterministic_and_covers_all_categories() -> None:
 
 def test_per_question_temperature_wins_over_type() -> None:
     """A q:<id> fit overrides the per-type temperature; other ids fall back to the type."""
-    from jevlike.calibration import Calibrator
+    from dlm_jev.calibration import Calibrator
 
     c = Calibrator(temperatures={"noul": 2.0, "q:churn": 5.0})
     assert c.temperature("noul", "churn") == 5.0

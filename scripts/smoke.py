@@ -5,8 +5,8 @@ uv run python scripts/smoke.py
 
 import json
 
-from jevlike.engine import DiffusionReader
-from jevlike.schema import DecideRequest
+from dlm_jev.engine import DiffusionReader
+from dlm_jev.schema import DecideRequest
 
 REQUEST = {
     "state": {

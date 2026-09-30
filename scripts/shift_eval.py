@@ -19,10 +19,10 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from benchmark import RUNS  # noqa: E402
 
-from jevlike.calibration import evaluate  # noqa: E402
-from jevlike.engine import DiffusionReader  # noqa: E402
-from jevlike.lora import load_adapter  # noqa: E402
-from jevlike.synth import QUESTIONS, make_dataset  # noqa: E402
+from dlm_jev.calibration import evaluate  # noqa: E402
+from dlm_jev.engine import DiffusionReader  # noqa: E402
+from dlm_jev.lora import load_adapter  # noqa: E402
+from dlm_jev.synth import QUESTIONS, make_dataset  # noqa: E402
 
 
 def mcnemar(b: int, c: int) -> float:

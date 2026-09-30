@@ -9,7 +9,7 @@ wheels/
 # Virtual environments
 .venv
 
-# jevlike
+# dlm-jev
 runs/
 .claude/.bc-*.json
 .claude/.bc-explain/
