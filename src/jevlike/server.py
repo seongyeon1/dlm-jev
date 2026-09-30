@@ -25,6 +25,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
         os.environ.get("JEVLIKE_MODEL", DEFAULT_MODEL),
         calibrator=calibrator,
         extra_reads=int(os.environ.get("JEVLIKE_EXTRA_READS", "0")),
+        adapter_path=os.environ.get("JEVLIKE_ADAPTER"),
     )
     yield
 

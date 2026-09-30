@@ -5,6 +5,7 @@ import threading
 import time
 from collections import OrderedDict
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import mlx.core as mx
@@ -82,12 +83,18 @@ class DiffusionReader:
         reread_below_confidence: float = 0.9,
         extra_reads: int = 0,
         prefix_cache_size: int = 32,
+        adapter_path: Optional[str] = None,
         seed: int = 0,
     ) -> None:
         from mlx_vlm import load
 
         self.model_path = model_path
         self.model, self.processor = load(model_path)
+        if adapter_path:
+            from jevlike.lora import load_adapter
+
+            load_adapter(self.model, Path(adapter_path))
+            self.model_path = f"{model_path}+{Path(adapter_path).stem}"
         self.tokenizer: Any = getattr(self.processor, "tokenizer", self.processor)
         self.vocab_size = int(self.model.config.text_config.vocab_size)
         self.calibrator = calibrator or Calibrator()
