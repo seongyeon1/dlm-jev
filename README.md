@@ -13,6 +13,7 @@ uv sync
 uv run python scripts/smoke.py                 # first run downloads the model (~15GB)
 uv run python scripts/benchmark.py --per-task 200   # SST-2 / AG News / Yelp → fits runs/calibration.json
 JEVLIKE_CALIBRATION=runs/calibration.json uv run jevlike-serve   # 127.0.0.1:8765
+# domain adapter: JEVLIKE_ADAPTER=runs/adapters/tickets-lora.safetensors (after scripts/train_lora.py)
 ```
 
 ```bash
@@ -37,6 +38,9 @@ curl -s localhost:8765/v1/decide -H 'content-type: application/json' -d '{
 | `src/jevlike/server.py` | FastAPI `POST /v1/decide` |
 | `scripts/benchmark.py` | Accuracy and calibration measured on public datasets |
 | `scripts/latency.py`, `scripts/reread_value.py` | Latency profile; whether re-reads pay for themselves |
+| `src/jevlike/synth.py`, `scripts/domain_eval.py` | Synthetic support tickets (ground truth by construction), per-question calibration |
+| `src/jevlike/lora.py`, `scripts/train_lora.py`, `scripts/shift_eval.py` | L2 LoRA on slot-label CE; does it learn the policy or the templates |
+| `scripts/interference.py`, `scripts/ar_baseline.py` | Multi-question interference; autoregressive baseline |
 
 ## Tests
 
