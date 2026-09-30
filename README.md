@@ -16,6 +16,8 @@ What is here:
 - **Calibration** — per-type or per-question temperature fitted on outcomes (NLL), with ECE/Brier reporting.
 - **Domain LoRA** — a LoRA trained with cross-entropy on the slot label distribution (a proper scoring rule),
   runnable on a 48GB Apple-silicon Mac; plus a synthetic support-ticket generator with exact ground truth.
+  A trained support-ticket triage adapter is on Hugging Face:
+  [seongyeon1/dlm-jev-tickets-lora](https://huggingface.co/seongyeon1/dlm-jev-tickets-lora).
 - **Measurements** — public benchmarks, multi-question interference, distribution-shift tests and an AR baseline,
   all in `docs/DESIGN.md` §6.
 
@@ -29,7 +31,9 @@ uv sync
 uv run python scripts/smoke.py                 # first run downloads the model (~15GB)
 uv run python scripts/benchmark.py --per-task 200   # SST-2 / AG News / Yelp → fits runs/calibration.json
 DLM_JEV_CALIBRATION=runs/calibration.json uv run dlm-jev-serve   # 127.0.0.1:8765
-# domain adapter: DLM_JEV_ADAPTER=runs/adapters/tickets-lora.safetensors (after scripts/train_lora.py)
+# domain adapter: train with scripts/train_lora.py, or use the published one:
+#   hf download seongyeon1/dlm-jev-tickets-lora tickets-lora.safetensors --local-dir adapters
+#   DLM_JEV_ADAPTER=adapters/tickets-lora.safetensors uv run dlm-jev-serve
 ```
 
 ```bash
